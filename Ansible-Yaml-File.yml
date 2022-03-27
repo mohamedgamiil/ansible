@@ -1,0 +1,85 @@
+---
+- name: install and run the Lamp stack on centos 7.
+  hosts: gamil
+  become: yes
+  tasks:
+
+  
+  - name: Installing Apache Latest 
+    yum:
+      name: httpd
+      state: latest
+ 
+ 
+  - name: start Apache 
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+
+
+
+  - name: Installing MySQl 
+    yum:
+      name: 
+      - mysql-server
+      - mysql
+      state: latest
+  
+  
+  - name: start mysql 
+    service:
+      name: mysqld.service
+      state: started
+      enabled: yes
+
+
+  - name: Installing PHP 
+    yum:
+      name:
+      - php 
+      - php-mysqlnd
+      - php-mbstring
+      - php-xml
+      - php-opcache
+      - php-fpm
+      state: latest
+  
+  
+  - name: start PHP 
+    service:
+      name: php-fpm
+      state: started
+      enabled: yes
+
+  
+  
+  - name: open firewall with port 80/tcp 
+    firewalld:
+      port: 80/tcp
+      permanent: true
+      state: enabled
+
+  
+  
+  - name:  open firewall with port 443/tcp
+    firewalld:
+      port: 443/tcp
+      permanent: true
+      state: enabled
+
+
+
+
+
+
+  - name: Copying sample php page in the LAMP :*
+    copy:
+      src: /var/www/html/index.php
+      dest: /var/www/html/index.php 
+
+ 
+  - name: 
+    uri:
+      url: http://192.168.182.131/index.php
+      status_code: 200
