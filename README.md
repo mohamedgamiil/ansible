@@ -10,4 +10,4 @@
 6- then push the configration to Host-Server by used : 
      - #ansible-playbook ansible-yaml-file.yml
      
- 
+ <img width="253" alt="mm" src="https://user-images.githubusercontent.com/102469451/163923236-e8b124bb-971e-41c3-a884-4ba3eafc47f4.png">
